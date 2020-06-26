@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>APMC Gondal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #4CAF50;
+            height: 10%;
+            width: 100%;
+            text-align: center;
+            position: fixed;
+
+        }
+
+        .name {
+            margin: 10px 10px;
+            font-size: 50px;
+            color: white;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            top: 10%;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .main {
+            margin-left: 200px; /* Same as the width of the sidenav */
+            font-size: 20px; /* Increased text to enable scrolling */
+            padding: 7% 2%;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+
+        }
+
+        th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        input[type=number], select {
+            width: 100%;
+            height: 35px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=date], select {
+            width: 30%;
+            padding: 6px 10px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .hide {
+            visibility: hidden
+
+        }
+
+        input[type=submit] {
+            width: 10%;
+            background-color: #4CAF50;
+            margin-left: 45%;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 14px 20px;
+
+        }
+
+
+    </style>
+</head>
+<body>
+
+{% include 'admin/header.html' %}
+
+{% include 'admin/menu.html' %}
+
+<div class="main">
+    {% if available %}
+    <p>{{ available }}</p>
+    {% endif %}
+
+    <form action="/admin/insertPrice" method="post">
+
+
+        {% if ProductListVO and lenProductList %}
+        <table>
+            <tr>
+                <th>NO.</th>
+                <th>જનસી નુ નામ</th>
+                <th>નીચા</th>
+                <th>ઊંચા</th>
+                <th>સામન્ય</th>
+                <th>આવક (ક્વિન્ટલમાં)</th>
+            </tr>
+
+
+            {% for i in ProductListVO %}
+
+            <tr>
+
+                <td>{{ loop.index }}</td>
+                <td>{{ i['productName'] }}</td>
+                <td><input class="input" type="number" name="low_{{ i['productId'] }}"></td>
+                <td><input class="input" type="number" name="high_{{ i['productId'] }}"></td>
+                <td><input class="input" type="number" name="average_{{ i['productId'] }}"></td>
+                <td><input class="input" type="number" name="income_{{ i['productId'] }}"></td>
+
+            </tr>
+            {% endfor %}
+
+
+        </table>
+        <div>
+            <input type="submit" value="Submit" align="center">
+
+        </div>
+        {% endif %}
+
+    </form>
+
+    <form action="/admin/insertNote" method="post">
+        <label>Note : </label><textarea name="note" style="width: 100%"></textarea>
+        <input type="submit" value="submit">
+    </form>
+
+
+</div>
+
+
+</body>
+</html>

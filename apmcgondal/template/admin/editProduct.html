@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>APMC Gondal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #4CAF50;
+            height: 10%;
+            width: 100%;
+            text-align: center;
+            position: fixed;
+
+        }
+
+        .name {
+            margin: 10px 10px;
+            font-size: 50px;
+            color: white;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            top: 10%;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .main {
+            margin-left: 200px; /* Same as the width of the sidenav */
+            font-size: 20px; /* Increased text to enable scrolling */
+            padding: 7% 2%;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+
+    </style>
+</head>
+<body>
+
+{% include 'admin/header.html' %}
+
+{% include 'admin/menu.html' %}
+
+<div class="main">
+
+    <form action="/admin/updateProduct" method="post">
+        <fieldset>
+            <legend>જનસી ઉમેરો:</legend>
+            {% for row in ProductListVO %}
+            <label for="fname">જનસી નામ:</label>
+            <input type="text" id="fname" name="productName" value="{{ row['productName'] }} "><br><br>
+            <input type="hidden" name="productId" value="{{ row['productId'] }}">
+            {% endfor %}
+
+            <input type="submit" value="Submit">
+        </fieldset>
+    </form>
+
+
+</div>
+
+
+</body>
+</html>

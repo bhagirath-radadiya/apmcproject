@@ -258,7 +258,7 @@ def adminNote():
             file.write(note)
             file.close()
 
-            return redirect(url_for("adminindex", username="apmcgondal", password="1234"))
+            return redirect(url_for("adminindex", username="<username>", password="<password>"))
 
     except Exception as ex:
         print(ex)
